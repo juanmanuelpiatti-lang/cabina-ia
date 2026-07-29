@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cabina IA - Productor Virtual</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">REC</span>
+      <h1>Cabina <span>IA</span></h1>
+      <span class="tagline">Productor Virtual</span>
+    </div>
+    <div class="station-switcher">
+      <select id="stationSelect"></select>
+      <button id="manageStationsBtn" class="btn ghost">Gestionar estaciones</button>
+      <span id="clock" class="clock"></span>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card breaking" id="breakingCard">
+      <h2>Ultimo momento</h2>
+      <div id="breakingList" class="breaking-list">Sin novedades urgentes por ahora.</div>
+    </section>
+
+    <section class="card now-playing">
+      <h2>Al aire</h2>
+      <div class="np-row">
+        <div class="np-block">
+          <span class="np-label">Sonando</span>
+          <div id="npCurrent" class="np-track">- sin cargar -</div>
+        </div>
+        <div class="np-block">
+          <span class="np-label">Sigue</span>
+          <div id="npNext" class="np-track">- sin cargar -</div>
+        </div>
+      </div>
+      <div class="np-search">
+        <input id="musicSearchInput" type="text" placeholder="Buscar tema (artista o titulo)..." />
+        <button id="musicSearchBtn" class="btn">Buscar</button>
+      </div>
+      <div id="musicResults" class="music-results"></div>
+    </section>
+
+    <section class="card weather">
+      <h2>Clima - <span id="weatherCity"></span></h2>
+      <div id="weatherNow" class="weather-now"></div>
+      <div id="weatherForecast" class="weather-forecast"></div>
+    </section>
+
+    <section class="card traffic">
+      <h2>Transito - <span id="trafficCity"></span></h2>
+      <p class="muted">Vista en vivo de Google Maps para la ciudad configurada.</p>
+      <a id="trafficLink" class="btn" target="_blank" rel="noopener">Abrir transito en vivo</a>
+    </section>
+
+    <section class="card panorama">
+      <div class="panorama-header">
+        <h2>Panorama de noticias</h2>
+        <button id="regenPanoramaBtn" class="btn">Generar ahora</button>
+      </div>
+      <div id="panoramaMeta" class="muted"></div>
+      <pre id="panoramaText" class="panorama-text">Todavia no se genero el panorama de esta hora.</pre>
+    </section>
+
+    <section class="card headlines">
+      <h2>Titulares recientes</h2>
+      <ul id="headlinesList" class="headlines-list"></ul>
+    </section>
+  </main>
+
+  <dialog id="stationDialog" class="station-dialog">
+    <h2>Estaciones</h2>
+    <div id="stationForm">
+      <label>Nombre <input id="fStationName" type="text" /></label>
+      <label>Ciudad <input id="fCityName" type="text" placeholder="ej. Mar del Plata" /></label>
+      <label>Latitud <input id="fCityLat" type="number" step="0.0001" /></label>
+      <label>Longitud <input id="fCityLon" type="number" step="0.0001" /></label>
+      <label>Palabras clave "ultimo momento" (separadas por coma)
+        <input id="fKeywords" type="text" placeholder="urgente, ultimo momento, alerta" value="ultimo momento, urgente, de ultimo momento, alerta, ahora" />
+      </label>
+      <label>Fuente de noticias 1 - nombre <input id="fNews1Name" type="text" value="Infobae" /></label>
+      <label>Fuente de noticias 1 - URL de RSS <input id="fNews1Url" type="text" value="https://www.infobae.com/arc/outboundfeeds/rss/" /></label>
+      <label>Fuente de noticias 2 - nombre <input id="fNews2Name" type="text" value="La Nacion" /></label>
+      <label>Fuente de noticias 2 - URL de RSS <input id="fNews2Url" type="text" value="https://www.lanacion.com.ar/arc/outboundfeeds/rss/" /></label>
+      <label>Panorama con IA (opcional)
+        <select id="fLlmProvider">
+          <option value="none">Sin IA (plantilla gratis, recomendado para arrancar)</option>
+          <option value="anthropic">Anthropic (Claude)</option>
+          <option value="openai">OpenAI</option>
+        </select>
+      </label>
+      <label>API key (solo si elegiste Anthropic u OpenAI) <input id="fLlmKey" type="text" placeholder="sk-..." /></label>
+      <div class="dialog-actions">
+        <button id="saveStationBtn" class="btn">Guardar estacion</button>
+        <button id="closeDialogBtn" class="btn ghost">Cerrar</button>
+      </div>
+    </div>
+    <hr />
+    <ul id="stationListInDialog" class="station-list"></ul>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
