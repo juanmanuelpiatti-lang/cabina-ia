@@ -1,0 +1,53 @@
+{
+    "name": "cabina-ia",
+    "productName": "Cabina IA",
+    "version": "0.1.0",
+    "description": "Productor virtual para radios: musica, clima, transito, noticias de ultimo momento y panorama horario.",
+    "main": "main/main.js",
+    "author": "JMP",
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+          "start": "electron .",
+          "dev": "electron . --dev",
+          "start:web": "node web.js",
+          "dist:mac": "electron-builder --mac",
+          "dist:win": "electron-builder --win",
+          "dist:linux": "electron-builder --linux",
+          "dist:all": "electron-builder -mwl",
+          "test:modules": "node scripts/test-modules.js"
+    },
+    "devDependencies": {
+          "electron": "^31.0.0",
+          "electron-builder": "^24.13.3"
+    },
+    "dependencies": {
+          "chokidar": "^3.6.0",
+          "node-fetch": "^2.7.0",
+          "rss-parser": "^3.13.0"
+    },
+    "build": {
+          "appId": "com.jmp.cabinaia",
+          "productName": "Cabina IA",
+          "directories": {
+                  "output": "dist"
+          },
+          "files": [
+                  "main/**/*",
+                  "renderer/**/*",
+                  "modules/**/*",
+                  "data/**/*",
+                  "package.json"
+          ],
+          "mac": {
+                  "category": "public.app-category.productivity",
+                  "target": ["dmg", "zip"]
+          },
+          "win": {
+                  "target": ["nsis", "portable"]
+          },
+          "linux": {
+                  "target": ["AppImage"]
+          }
+    }
+}
